@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+  Detalle del cliente: {{ cliente.nombre }}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>{{ block.super }}</h1>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>NIT/CC</th>
+          <th>Email</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Monto del pago</th>
+          <th>Fecha del pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ cliente.codigo }}</td>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.nit_cc }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.direccion }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td>{{ cliente.pago }}</td>
+          <td>{{ cliente.fecha }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="{% url 'clientes:cliente_update' pk=cliente.pk %}" class="btn btn-primary">Editar</a>
+    <a href="{% url 'clientes:cliente_delete' pk=cliente.pk %}" class="btn btn-danger">Eliminar</a>
+  </div>
+{% endblock %}

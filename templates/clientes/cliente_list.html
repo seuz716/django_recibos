@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+  Lista de clientes
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4">
+    <h1 class="text-center text-3xl font-bold mb-4">Lista de clientes</h1>
+
+    <table class="table-auto w-full border-collapse">
+      <thead class="bg-gray-800 text-white">
+        <tr>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Código</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Nombre</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">NIT/CC</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Email</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Dirección</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Teléfono</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Monto del pago</th>
+          <th class="py-2 px-4 border border-gray-600 metal-header">Fecha del pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes %}
+        <tr class="text-center">
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.codigo }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.nombre }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.nit_cc }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.email }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.direccion }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.telefono }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.pago }}</a>
+          </td>
+          <td class="py-2 px-4 border border-gray-400">
+            <a href="{% url 'clientes:cliente_detail' pk=cliente.pk %}">{{ cliente.fecha }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <style>
+    .metal-header {
+      background-color: #121212;
+      color: #ffffff;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom-width: 2px;
+    }
+  </style>
+  <script>
+    $(document).ready(function() {
+      // Seleccionar todas las filas de la tabla excepto la primera
+      var rows = $("table tr:not(:first)");
+      // Agregar un evento hover a las filas
+      rows.hover(
+        // Función que se ejecuta cuando se entra al elemento
+        function() {
+          // Agregar la clase bg-blue-200 a la fila
+          $(this).addClass("bg-blue-200");
+          // Cambiar la opacidad de la fila a 0.8
+          $(this).css("opacity", "0.8");
+        },
+        // Función que se ejecuta cuando se sale del elemento
+        function() {
+          // Remover la clase bg-blue-200 de la fila
+          $(this).removeClass("bg-blue-200");
+          // Restaurar la opacidad de la fila a 1
+          $(this).css("opacity", "1");
+        }
+      );
+    });
+  </script>
+{% endblock %}
